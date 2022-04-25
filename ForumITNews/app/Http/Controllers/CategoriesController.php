@@ -48,6 +48,17 @@ class CategoriesController extends Controller
     public function show(Category $category)
     {
         //
+        return response()->json([
+            'data' => [
+                'id' => $category->id,
+                'type' => 'Category',
+                'attributes' => [
+                    'name' => $category->name,
+                    'created_at' => $category->created_at,
+                    'updated_at' => $category->updated_at,
+                ]
+            ]
+        ]);
     }
 
     /**
