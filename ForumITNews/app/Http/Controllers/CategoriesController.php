@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\CategoriesResource;
 use App\Models\Category;
-use App\Http\Requests\StoreCategoryRequest;
+use Illuminate\Http\Request;
 use App\Http\Requests\UpdateCategoryRequest;
-use function GuzzleHttp\Promise\all;
 
 class CategoriesController extends Controller
 {
@@ -36,9 +35,12 @@ class CategoriesController extends Controller
      * @param  \App\Http\Requests\StoreCategoryRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(Request $request)
     {
-        //
+        $category = Category::create([
+            'name' => $request->input('name')
+        ]);
+        return new CategoriesResource($category);
     }
 
     /**
@@ -71,9 +73,12 @@ class CategoriesController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function update(Request $request, Category $category)
     {
-        //
+        $category->update([
+            'name'=> $request->input('name')
+        ]);
+        return new CategoriesResource($category);
     }
 
     /**
@@ -85,5 +90,7 @@ class CategoriesController extends Controller
     public function destroy(Category $category)
     {
         //
+        $category->delete();
+        return response(null, 204);
     }
 }

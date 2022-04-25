@@ -19,6 +19,5 @@ Route::middleware('auth:api')->prefix('v1')->group(function() {
         return $request->user();
     });
     Route::apiResource('categories', \App\Http\Controllers\CategoriesController::class);
-//    Route::get('categories/{category}', [\App\Http\Controllers\CategoriesController::class, 'show']);
 });
 
