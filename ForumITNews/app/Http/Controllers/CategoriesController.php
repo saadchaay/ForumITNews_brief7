@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CategoriesResource;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use function GuzzleHttp\Promise\all;
 
 class CategoriesController extends Controller
 {
@@ -15,7 +17,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        return CategoriesResource::collection(Category::all());
     }
 
     /**
@@ -48,17 +50,7 @@ class CategoriesController extends Controller
     public function show(Category $category)
     {
         //
-        return response()->json([
-            'data' => [
-                'id' => $category->id,
-                'type' => 'Category',
-                'attributes' => [
-                    'name' => $category->name,
-                    'created_at' => $category->created_at,
-                    'updated_at' => $category->updated_at,
-                ]
-            ]
-        ]);
+        return new CategoriesResource($category);
     }
 
     /**
