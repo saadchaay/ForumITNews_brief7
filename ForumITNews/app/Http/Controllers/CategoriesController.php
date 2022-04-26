@@ -16,9 +16,9 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-//        return CategoriesResource::collection(Category::all());
-          $posts = Category::find(1)->posts;
-          return $posts ;
+        return CategoriesResource::collection(Category::all());
+//          $posts = Category::find(1)->posts;
+//          return $posts ;
     }
 
     /**

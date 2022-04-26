@@ -17,9 +17,9 @@ class PostsController extends Controller
     public function index()
     {
         //
-        $category = Post::find(2)->category;
-        return $category;
-//        return PostsResource::collection(Post::all());
+//        $category = Post::find(2)->category;
+//        return $category;
+        return PostsResource::collection(Post::all());
 
     }
 
