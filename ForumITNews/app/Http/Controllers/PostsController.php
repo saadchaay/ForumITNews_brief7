@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PostsResource;
 use App\Models\Post;
 use App\Http\Requests\PostsRequest;
 
@@ -15,6 +16,7 @@ class PostsController extends Controller
     public function index()
     {
         //
+        return PostsResource::collection(Post::all());
     }
 
     /**
@@ -36,6 +38,15 @@ class PostsController extends Controller
     public function store(PostsRequest $request)
     {
         //
+        $post = Post::create([
+            'body' => $request->input('body'),
+            'image' => $request->input('image'),
+            'upVotes' => $request->input('upVotes'),
+            'downVotes' => $request->input('downVotes'),
+            'created_by_user' => auth('api')->user()->id,
+            'category_id' => $request->input('category')
+        ]);
+        return new PostsResource($post);
     }
 
     /**
@@ -47,6 +58,7 @@ class PostsController extends Controller
     public function show(Post $post)
     {
         //
+        return new PostsResource($post);
     }
 
     /**
@@ -69,7 +81,15 @@ class PostsController extends Controller
      */
     public function update(PostsRequest $request, Post $post)
     {
-        //
+        $post->update([
+            'body' => $request->input('body'),
+            'image' => $request->input('image'),
+            'upVotes' => $request->input('upVotes'),
+            'downVotes' => $request->input('downVotes'),
+            'created_by_user' => auth('api')->user()->id,
+            'category_id' => $request->input('category')
+        ]);
+        return new PostsResource($post);
     }
 
     /**

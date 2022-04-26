@@ -19,5 +19,6 @@ Route::middleware('auth:api')->prefix('v1')->group(function() {
         return $request->user();
     });
     Route::apiResource('categories', \App\Http\Controllers\CategoriesController::class);
+    Route::apiResource('posts', \App\Http\Controllers\PostsController::class);
 });
 
