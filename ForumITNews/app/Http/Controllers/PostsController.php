@@ -41,18 +41,15 @@ class PostsController extends Controller
      */
     public function store(PostsRequest $request)
     {
-        //
-        $category = Post::find(1)->get_category();
-//        $post = Post::create([
-//            'body' => $request->input('body'),
-//            'image' => $request->input('image'),
-//            'upVotes' => $request->input('upVotes'),
-//            'downVotes' => $request->input('downVotes'),
-//            'created_by_user' => auth('api')->user()->id,
-//            'category_id' => $category
-//        ]);
-//        return new PostsResource($post);
-            return response()->json($category);
+        $post = Post::create([
+            'body' => $request->input('body'),
+            'image' => $request->input('image'),
+            'upVotes' => $request->input('upVotes'),
+            'downVotes' => $request->input('downVotes'),
+            'created_by_user' => auth('api')->user()->id,
+            'category_id' => $category
+        ]);
+        return new PostsResource($post);
     }
 
 

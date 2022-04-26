@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\CommentsResource;
 use App\Models\Comment;
 use App\Http\Requests\CommentsRequest;
+use App\Models\Post;
 use phpDocumentor\Reflection\Types\Collection;
 
 class CommentsController extends Controller
@@ -39,13 +40,21 @@ class CommentsController extends Controller
     public function store(CommentsRequest $request)
     {
         //
-        $comment = Comment::create([
-            'body' => $request->input('body'),
-            'user_id' => $request->input('user'),
-            'post_id' => $request->input('post'),
-            'reply_to' => $request->input('reply_to'),
-        ]);
-        return new CommentsResource($comment);
+        $post = Post::find(2)->comments->first() ;
+        $comment = Comment::find(9)->replies->first();
+//
+//        $comment = Comment::create([
+//            'body' => $request->input('body'),
+//            'user_id' => auth('api')->user()->id,
+//            'post_id' => $post->post_id,
+//            'reply_to' => ($comment->id)?$comment->id:NULL,
+//        ]);
+//        return new CommentsResource($comment);
+        if(empty($comment)){
+            return "yes it's empty...";
+        } else {
+            return "it doesn't empty...";
+        }
     }
 
     /**
