@@ -18,9 +18,9 @@ class CommentsResource extends JsonResource
             'data' => [
                 'id' => (string)$this->id,
                 'type' => 'Comments',
-                'user'=> (string)$this->user,
-                'post' => (string)$this->post,
-                'comment' => (string)$this->comment,
+                'user'=> (string)$this->user_id,
+                'post' => (string)$this->post_id,
+                'comment' => (string)$this->reply_to,
                 'attributes' => [
                     'body' => $this->body,
                     'created_at' => $this->created_at,
