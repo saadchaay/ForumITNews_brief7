@@ -20,5 +20,6 @@ Route::middleware('auth:api')->prefix('v1')->group(function() {
     });
     Route::apiResource('categories', \App\Http\Controllers\CategoriesController::class);
     Route::apiResource('posts', \App\Http\Controllers\PostsController::class);
+    Route::apiResource('comments', \App\Http\Controllers\CommentsController::class);
 });
 
