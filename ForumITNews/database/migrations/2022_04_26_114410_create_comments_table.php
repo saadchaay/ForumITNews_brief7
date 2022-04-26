@@ -30,11 +30,11 @@ class CreateCommentsTable extends Migration
                 ->on('users')
                 ->onDelete('cascade');
 
-            $table->unsignedBigInteger('reply_id');
-            $table->foreign('reply_id')
+            $table->unsignedBigInteger('reply_to');
+            $table->foreign('reply_to')
                 ->references('id')
                 ->on('comments')
-                ->onDelete('cascade');
+                ->onDelete('cascade')->nullable()->default('NULL');
 
         });
 

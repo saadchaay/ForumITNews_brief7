@@ -14,7 +14,10 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'body'=> $this->faker->text,
+            'post_id'=>(string)'2',
+            'user_id'=>(string)'1',
+            'reply_to'=>(string)'1',
         ];
     }
 }
