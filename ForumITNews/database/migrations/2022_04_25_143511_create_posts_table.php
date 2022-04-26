@@ -24,12 +24,12 @@ class CreatePostsTable extends Migration
             $table->foreign('category_id')
                     ->references('id')
                     ->on('categories')
-                    ->cascade('delete');
+                    ->onDelete('cascade');
             $table->unsignedBigInteger('created_by_user');
             $table->foreign('created_by_user')
                     ->references('id')
                     ->on('users')
-                    ->cascade('delete');
+                    ->onDelete('cascade');
         });
     }
 

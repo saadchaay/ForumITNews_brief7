@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\PostsResource;
 use App\Models\Post;
+use App\Models\Category;
 use App\Http\Requests\PostsRequest;
 
 class PostsController extends Controller
@@ -16,7 +17,10 @@ class PostsController extends Controller
     public function index()
     {
         //
-        return PostsResource::collection(Post::all());
+        $category = Post::find(2)->category;
+        return $category;
+//        return PostsResource::collection(Post::all());
+
     }
 
     /**
@@ -38,16 +42,20 @@ class PostsController extends Controller
     public function store(PostsRequest $request)
     {
         //
-        $post = Post::create([
-            'body' => $request->input('body'),
-            'image' => $request->input('image'),
-            'upVotes' => $request->input('upVotes'),
-            'downVotes' => $request->input('downVotes'),
-            'created_by_user' => auth('api')->user()->id,
-            'category_id' => $request->input('category')
-        ]);
-        return new PostsResource($post);
+        $category = Post::find(1)->get_category();
+//        $post = Post::create([
+//            'body' => $request->input('body'),
+//            'image' => $request->input('image'),
+//            'upVotes' => $request->input('upVotes'),
+//            'downVotes' => $request->input('downVotes'),
+//            'created_by_user' => auth('api')->user()->id,
+//            'category_id' => $category
+//        ]);
+//        return new PostsResource($post);
+            return response()->json($category);
     }
+
+
 
     /**
      * Display the specified resource.
@@ -58,6 +66,7 @@ class PostsController extends Controller
     public function show(Post $post)
     {
         //
+
         return new PostsResource($post);
     }
 
